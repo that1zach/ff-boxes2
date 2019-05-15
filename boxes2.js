@@ -1,4 +1,13 @@
-const boxSchema = require("./" + process.argv[2]);
+let boxSchemas = [];
+
+if (process.argv[2]) {
+  boxSchemas.push(require("./" + process.argv[2]));
+} else {
+  boxSchemas.push(require("./boxes/box1"));
+  boxSchemas.push(require("./boxes/box2"));
+  boxSchemas.push(require("./boxes/box3"));
+}
+
 let output = [];
 
 function Boxes(boxSchema) {
@@ -6,13 +15,32 @@ function Boxes(boxSchema) {
   height = 3; // careful, it reduces to 2 if there are interior boxes
   pass = 0;
 
+  /*
+	module.exports = ["h", ["h", [], [], ["v", [], []]]];
+	+-----------------+
+	| +-+ +-+ +-----+ |
+	| | | | | | +-+ | |
+	| +-+ +-+ | | | | |
+	|         | +-+ | |
+	|         | +-+ | |
+	|         | | | | |
+	|         | +-+ | |
+	|         +-----+ |
+	+-----------------+
+	19 x 10
+	*/
+
   getDims = (boxArray, start = true) => {
     boxArray.forEach(b => {
       if (typeof b === "object" && b.length > 0) {
         height = start ? 2 : height;
+        //console.log("height: ", height);
         width += (b[0] === "h" ? b.length - 1 : 1) * 4;
-        height +=
-          b[1].length > 0 ? 2 : b[0] === "h" ? b.length : (b.length - 1) * 3;
+        height += b.some(i => typeof i === "object" && i.length > 0)
+          ? 2
+          : b[0] === "h"
+          ? b.length
+          : (b.length - 1) * 3;
         getDims(b, false);
       }
     });
@@ -125,9 +153,10 @@ function Boxes(boxSchema) {
     createShell();
     injectBoxes([boxArray[1]]); // inside boxes are always starting at 1
     drawBoxes();
+    output = [];
   };
 
   parseBoxes(boxSchema);
 }
 
-Boxes(boxSchema);
+boxSchemas.forEach(b => Boxes(b));
