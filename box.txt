@@ -1,0 +1,94 @@
+Write a program that outputs nested boxes in ASCII art (like russian dolls).
+
+A box may have multiple boxes inside of it, which are siblings to each other.
+Those children boxes may contain their own children boxes, etc..
+
+Children boxes can stack horizontally or vertically, but not both.
+
+Please provide a solution with a good object-oriented design to support
+this functionality. Write an implementation and corresponding client code
+which uses the implementation. Client code should be reasonably simple,
+and should produce different configurations with trivial changes.
+
+The program should ideally be ran via command line and
+the output should print on the console when ran.
+
+For aesthetic reasons we have a horizontal padding of one space
+character inside and between boxes.
+
+Examples of box configurations:
+
+Smallest box is an empty box with one space character in it:
++-+
+| |
++-+
+
+A more complicated example:
++---------------------------------+
+| +-------------+ +-+ +-+ +-----+ |
+| | +---------+ | | | | | | +-+ | |
+| | | +-+ +-+ | | +-+ +-+ | | | | |
+| | | | | | | | |         | +-+ | |
+| | | +-+ +-+ | |         | +-+ | |
+| | +---------+ |         | | | | |
+| | +-+         |         | +-+ | |
+| | | |         |         +-----+ |
+| | +-+         |                 |
+| | +-+         |                 |
+| | | |         |                 |
+| | +-+         |                 |
+| +-------------+                 |
++---------------------------------+
+
+Variation of the previous example:
++---------------------+
+| +-----------------+ |
+| | +-----+ +-+ +-+ | |
+| | | +-+ | | | | | | |
+| | | | | | +-+ +-+ | |
+| | | +-+ |         | |
+| | | +-+ |         | |
+| | | | | |         | |
+| | | +-+ |         | |
+| | +-----+         | |
+| +-----------------+ |
+| +-+                 |
+| | |                 |
+| +-+                 |
+| +-+                 |
+| | |                 |
+| +-+                 |
+| +---------+         |
+| | +-+ +-+ |         |
+| | | | | | |         |
+| | +-+ +-+ |         |
+| +---------+         |
++---------------------+
+
+Some simple cases are supported too:
++-----------------+
+| +-------------+ |
+| | +---------+ | |
+| | | +-----+ | | |
+| | | | +-+ | | | |
+| | | | | | | | | |
+| | | | +-+ | | | |
+| | | +-----+ | | |
+| | +---------+ | |
+| +-------------+ |
++-----------------+
+
+Last example:
++-------------------------+
+| +-----+ +-----+ +-----+ |
+| | +-+ | | +-+ | | +-+ | |
+| | | | | | | | | | | | | |
+| | +-+ | | +-+ | | +-+ | |
+| | +-+ | | +-+ | | +-+ | |
+| | | | | | | | | | | | | |
+| | +-+ | | +-+ | | +-+ | |
+| | +-+ | | +-+ | | +-+ | |
+| | | | | | | | | | | | | |
+| | +-+ | | +-+ | | +-+ | |
+| +-----+ +-----+ +-----+ |
++-------------------------+
